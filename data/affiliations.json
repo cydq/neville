@@ -1,0 +1,19 @@
+{
+  "affiliations": [
+    {
+      "name": "None (In Region)",
+      "tag": "N/A",
+      "type": "Other"
+    },
+    {
+      "name": "Out of Region",
+      "tag": "OOR",
+        "type": "Other"
+    },
+    {
+      "name": "North Esports VALORANT League",
+      "tag": "NEVL",
+      "type": "Organization"
+    }
+  ]
+}
