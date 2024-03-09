@@ -6,7 +6,7 @@ import {
   User,
   type UserResolvable,
 } from "discord.js";
-import { Option } from "tsfy";
+import { type Option, opt, None } from "tsfy";
 import { tables } from "./database.ts";
 import type { Record } from "airtable";
 import { cast } from "tsfy/fn";
@@ -84,10 +84,10 @@ export async function getPlayer(user: UserResolvable): Promise<Option<Record<Pla
     })
     .all();
 
-  const player = Option.from(result.at(0));
+  const player = opt(result.at(0));
   if (player.isSome()) return cast(player);
 
-  if (!(user instanceof GuildMember) && !(user instanceof User)) return player;
+  if (!(user instanceof GuildMember) && !(user instanceof User)) return None;
 
   const search = await tables.player
     .select({
@@ -96,8 +96,8 @@ export async function getPlayer(user: UserResolvable): Promise<Option<Record<Pla
     })
     .all();
 
-  const found = Option.from(search.at(0));
-  if (found.isNone()) return found;
+  const found = opt(search.at(0));
+  if (found.isNone()) return cast(found);
 
   tables.player
     .update([
@@ -121,10 +121,10 @@ export async function getTeam(role: RoleResolvable): Promise<Option<Record<Team>
     })
     .all();
 
-  const team = Option.from(result.at(0));
+  const team = opt(result.at(0));
   if (team.isSome()) return cast(team);
 
-  if (!(role instanceof Role)) return team;
+  if (!(role instanceof Role)) return None;
 
   const search = await tables.team
     .select({
@@ -133,8 +133,8 @@ export async function getTeam(role: RoleResolvable): Promise<Option<Record<Team>
     })
     .all();
 
-  const found = Option.from(search.at(0));
-  if (found.isNone()) return found;
+  const found = opt(search.at(0));
+  if (found.isNone()) return cast(found);
 
   tables.team
     .update([

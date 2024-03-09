@@ -10,7 +10,7 @@
   "dependencies": {
     "airtable": "^0.12.2",
     "discord.js": "^14.14.1",
-    "tsfy": "^0.2.0"
+    "tsfy": "^0.3.0"
   },
   "devDependencies": {
     "@types/bun": "latest",

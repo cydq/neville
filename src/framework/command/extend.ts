@@ -12,7 +12,7 @@ import {
 } from "discord.js";
 
 import type { Command, CommandResult } from "scarf";
-import { Err, Option } from "tsfy";
+import { Err, opt } from "tsfy";
 import type { ContextMenuCommand } from "./contextMenu.ts";
 
 declare module "discord.js" {
@@ -27,7 +27,7 @@ export function useCommands(client: Client) {
   client.on(Events.InteractionCreate, async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
 
-    const command = Option.from(interaction.client.commands.get(interaction.commandName)).expect(
+    const command = opt(interaction.client.commands.get(interaction.commandName)).expect(
       `No command matching ${interaction.commandName} was found.`,
     );
 
@@ -65,7 +65,7 @@ export function useCommands(client: Client) {
   client.on(Events.InteractionCreate, async (interaction) => {
     if (!interaction.isContextMenuCommand()) return;
 
-    const command = Option.from(interaction.client.commands.get(interaction.commandName)).expect(
+    const command = opt(interaction.client.commands.get(interaction.commandName)).expect(
       `No command matching ${interaction.commandName} was found.`,
     );
 
